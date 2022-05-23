@@ -21,4 +21,4 @@ function onSubmitForm(e) {
     email.value = data.email
     message.value = data.message
   }
-})
+})()
