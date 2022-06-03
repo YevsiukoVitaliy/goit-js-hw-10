@@ -2,19 +2,16 @@ import "./css/styles.css";
 import debounce from "lodash.debounce";
 import { fetchCountries } from "./fetchCountries";
 import { Notify } from "notiflix/build/notiflix-notify-aio";
-
 const DEBOUNCE_DELAY = 300;
 const refs = {
   searchInput: document.querySelector("#search-box"),
   countryList: document.querySelector(".country-list"),
   countryBlock: document.querySelector(".country-info"),
 };
-
 refs.searchInput.addEventListener(
   "input",
   debounce(handleSerch, DEBOUNCE_DELAY)
 );
-
 function handleSerch(e) {
   const request = e.target.value.trim();
 
@@ -23,7 +20,6 @@ function handleSerch(e) {
     deleteMarkup(refs.countryList);
     return;
   }
-
   fetchCountries(request)
     .then(data => {
       if (data.length > 10) {
@@ -44,7 +40,6 @@ function handleSerch(e) {
       console.log(error);
     });
 }
-
 function renderMarkup(countries) {
   if (countries.length > 1) {
     refs.countryList.innerHTML = makeListMarkup(countries);
@@ -54,7 +49,6 @@ function renderMarkup(countries) {
     deleteMarkup(refs.countryList);
   }
 }
-
 function makeListMarkup(countries) {
   return countries
     .map(
@@ -63,7 +57,6 @@ function makeListMarkup(countries) {
     )
     .join("");
 }
-
 function makeInfoBlockMarkup(countries) {
   return countries
     .map(
@@ -79,7 +72,6 @@ function makeInfoBlockMarkup(countries) {
     )
     .join("");
 }
-
 function deleteMarkup(element) {
   element.innerHTML = "";
 }
